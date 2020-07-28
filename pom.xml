@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.javaclass</groupId>
+    <artifactId>BlockChainCS</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <dependencies>
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>core</artifactId>
+            <version>4.5.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>2.3.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.14</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>apache-log4j-extras</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+        <testResources>
+            <testResource>
+                <directory>src/test/resources</directory>
+                <filtering>false</filtering>
+            </testResource>
+        </testResources>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+      <!--  <plugins>
+            <plugin>
+                <groupId>org.web3j</groupId>
+                <artifactId>web3j-maven-plugin</artifactId>
+                <version>4.2.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources-web3j</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>generate-sources</goal>
+                        </goals>
+                        <configuration>
+                            <packageName>contract</packageName>
+                            <sourceDestination>${basedir}/target/generated-sources/contracts</sourceDestination>
+                            <soliditySourceFiles>
+                                <directory>${basedir}/src/main/resources</directory>
+                                <includes>
+                                    <include>**/*.sol</include>
+                                </includes>
+                            </soliditySourceFiles>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>-->
+
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>add-source</id>-->
+                        <!--<phase>generate-sources</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>add-source</goal>-->
+                        <!--</goals>-->
+                        <!--<configuration>-->
+                            <!--<sources>-->
+                                <!--<source>${basedir}/target/generated-sources/contracts</source>-->
+                            <!--</sources>-->
+                        <!--</configuration>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+        <!--</plugins>-->
+    </build>
+
+    <properties>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+    </properties>
+
+
+
+</project>

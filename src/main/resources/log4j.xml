@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE log4j:configuration PUBLIC "-//APACHE//DTD LOG4J 1.2//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+
+
+<log4j:configuration debug="false" >
+
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="[FS] %d{yyyy-MM-dd HH:mm:ss} %-5p %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="info" class="org.apache.log4j.rolling.RollingFileAppender">
+        <param name="append" value="true" />
+        <param name="encoding" value="utf-8"/>
+        <param name="ImmediateFlush" value="True" />
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="activeFileName" value="${catalina.base}/logs/FileLogs/log4jInfoFile.log" />
+            <param name="fileNamePattern"
+                   value="${catalina.base}/logs/FileLogs/log4jInfoFile%d{_yyyy.MM.dd}.log" />
+        </rollingPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n" />
+        </layout>
+    </appender>
+
+
+
+    <appender name="debug" class="org.apache.log4j.rolling.RollingFileAppender">
+        <param name="append" value="true" />
+        <param name="encoding" value="utf-8"/>
+        <param name="ImmediateFlush" value="True" />
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="activeFileName" value="${catalina.base}/logs/FileLogs/log4jDebugFile.log" />
+            <param name="fileNamePattern"
+                   value="${catalina.base}/logs/FileLogs/log4jDebugFile%d{_yyyy.MM.dd}.log" />
+        </rollingPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n" />
+        </layout>
+
+    </appender>
+
+
+    <appender name="fatal" class="org.apache.log4j.rolling.RollingFileAppender">
+        <param name="append" value="true" />
+        <param name="encoding" value="utf-8"/>
+        <param name="ImmediateFlush" value="True" />
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="activeFileName" value="${catalina.base}/logs/FileLogs/log4jFatalFile.log" />
+            <param name="fileNamePattern"
+                   value="${catalina.base}/logs/FileLogs/log4jFatalFile%d{_yyyy.MM.dd}.log"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n" />
+        </layout>
+    </appender>
+
+
+    <appender name="error" class="org.apache.log4j.rolling.RollingFileAppender">
+        <param name="append" value="true" />
+        <param name="encoding" value="utf-8"/>
+        <param name="ImmediateFlush" value="True" />
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="activeFileName" value="${catalina.base}/logs/FileLogs/log4jErrorFile.log" />
+            <param name="fileNamePattern"
+                   value="${catalina.base}/logs/FileLogs/log4jErrorFile%d{_yyyy.MM.dd}.log"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="trace" class="org.apache.log4j.rolling.RollingFileAppender">
+        <param name="append" value="true" />
+        <param name="encoding" value="utf-8"/>
+        <param name="ImmediateFlush" value="True" />
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="activeFileName" value="${catalina.base}/logs/FileLogs/log4jTraceFile.log" />
+            <param name="fileNamePattern"
+                   value="${catalina.base}/logs/FileLogs/log4jTraceFile%d{_yyyy.MM.dd}.log"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n" />
+        </layout>
+    </appender>
+
+
+    <appender name="warn" class="org.apache.log4j.rolling.RollingFileAppender" >
+        <param name="append" value="true" />
+        <param name="encoding" value="utf-8"/>
+        <param name="ImmediateFlush" value="True" />
+        <rollingPolicy class="org.apache.log4j.rolling.TimeBasedRollingPolicy">
+            <param name="activeFileName" value="${catalina.base}/logs/FileLogs/log4jWarnFile.log" />
+            <param name="fileNamePattern"
+                   value="${catalina.base}/logs/FileLogs/log4jWarnFile%d{_yyyy.MM.dd}.log"/>
+        </rollingPolicy>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd HH:mm:ss} %-5p %m%n" />
+        </layout>
+    </appender>
+
+    <logger name="debuglogger">
+        <level value="DEBUG"/>
+        <appender-ref ref="debug"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="tracelogger">
+        <level value="TRACE"/>
+        <appender-ref ref="trace"/>
+    </logger>
+    <logger name="infologger">
+        <level value="INFO"/>
+        <appender-ref ref="info"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="fatallogger">
+        <level value="FATAL"/>
+        <appender-ref ref="fatal"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="warnlogger">
+        <level value="WARN"/>
+        <appender-ref ref="warn"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="errorlogger">
+        <level value="ERROR"/>
+        <appender-ref ref="error"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+</log4j:configuration>
