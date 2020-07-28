@@ -7,7 +7,7 @@ import entity.Peer;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.tuples.generated.Tuple10;
+import org.web3j.tuples.generated.Tuple11;
 import org.web3j.tx.gas.DefaultGasProvider;
 import util.ConnectionUtil;
 
@@ -34,7 +34,7 @@ public class PeerService {
         Credentials credentials = Credentials.create(pk);
         PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
         BigInteger bigInteger = new BigInteger("200000000");
-        TransactionReceipt tx = peerList.registerPeer("storage1.localhost",bigInteger,bigInteger,bigInteger,bigInteger,"7*24","ths is first peer registration.",new Date().toString(),new BigInteger("1")).send();
+        TransactionReceipt tx = peerList.registerPeer("storage1.localhost",bigInteger,bigInteger,bigInteger,bigInteger,"7*24",new Date().toString(),new BigInteger("1")).send();
         System.out.println("contract address: " + tx.getContractAddress());
         System.out.println("From: " + tx.getFrom());
         System.out.println("To: " + tx.getTo());
@@ -51,7 +51,7 @@ public class PeerService {
         PeerList peerList = contract.PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
         BigInteger patent_count = peerList.peerCount().send();
         for(long i = 1;i<=patent_count.intValue();i++) {
-            Tuple10<BigInteger, String, BigInteger, BigInteger, BigInteger, BigInteger, String, String, String, BigInteger> value = peerList.peers(BigInteger.valueOf(i)).send();
+            Tuple11<BigInteger, String, String, BigInteger, BigInteger, BigInteger, BigInteger, BigInteger, String, String, BigInteger> value = peerList.peers(BigInteger.valueOf(i)).send();
             Peer peer = new Peer(value);
             peers.add(peer);
         }
@@ -62,7 +62,7 @@ public class PeerService {
     public static void update(String pk, int index) throws Exception {
         Credentials credentials = Credentials.create(pk);
         PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
-        TransactionReceipt tx = peerList.updatePublicAddress(BigInteger.valueOf(index),"new addresss updated").send();
+        TransactionReceipt tx = peerList.updatePublicUrl(BigInteger.valueOf(index),"new addresss updated").send();
         System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
     }
 

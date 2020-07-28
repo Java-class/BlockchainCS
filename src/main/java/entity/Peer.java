@@ -1,33 +1,21 @@
 package entity;
 
-import org.web3j.tuples.generated.Tuple10;
+import org.web3j.tuples.generated.Tuple11;
 
 import java.math.BigInteger;
 
 public class Peer {
     private int id;
-    private String public_address;
+    private String owner;
+    private String url;
     private long totalSpace;
+    private long usedSpace;
     private long maxBandwidth;
     private int maxUser;
     private int uptimePercentage;
     private String availableTimeRange;
-    private String description;
     private String date;
     private PeerStatus status;
-
-    public Peer(Tuple10<BigInteger, String, BigInteger, BigInteger, BigInteger, BigInteger, String, String, String, BigInteger> value) {
-        this.id = value.component1().intValue();
-        this.public_address = value.component2();
-        this.totalSpace = value.component3().longValue();
-        this.maxBandwidth = value.component4().longValue();
-        this.maxUser = value.component5().intValue();
-        this.uptimePercentage = value.component6().intValue();
-        this.availableTimeRange = value.component7();
-        this.description = value.component8();
-        this.date = value.component9();
-        this.status = PeerStatus.toEnum(value.component10().intValue());
-    }
 
     public int getId() {
         return id;
@@ -37,12 +25,20 @@ public class Peer {
         this.id = id;
     }
 
-    public String getPublic_address() {
-        return public_address;
+    public String getOwner() {
+        return owner;
     }
 
-    public void setPublic_address(String public_address) {
-        this.public_address = public_address;
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public long getTotalSpace() {
@@ -51,6 +47,14 @@ public class Peer {
 
     public void setTotalSpace(long totalSpace) {
         this.totalSpace = totalSpace;
+    }
+
+    public long getUsedSpace() {
+        return usedSpace;
+    }
+
+    public void setUsedSpace(long usedSpace) {
+        this.usedSpace = usedSpace;
     }
 
     public long getMaxBandwidth() {
@@ -85,14 +89,6 @@ public class Peer {
         this.availableTimeRange = availableTimeRange;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getDate() {
         return date;
     }
@@ -109,17 +105,43 @@ public class Peer {
         this.status = status;
     }
 
+
+
+    public Peer(Tuple11<BigInteger, String, String, BigInteger, BigInteger, BigInteger, BigInteger, BigInteger, String, String, BigInteger> value) {
+        this.id = value.component1().intValue();
+        this.owner = value.component2();
+        this.url = value.component3();
+        this.totalSpace = value.component4().longValue();
+        this.usedSpace = value.component5().longValue();
+        this.maxBandwidth = value.component6().longValue();
+        this.maxUser = value.component7().intValue();
+        this.uptimePercentage = value.component8().intValue();
+        this.availableTimeRange = value.component9();
+        this.date = value.component10();
+        this.status = PeerStatus.toEnum(value.component11().intValue());
+    }
+
+    public Peer(String url, long totalSpace, long maxBandwidth, int maxUser, int uptimePercentage, String availableTimeRange) {
+        this.url = url;
+        this.totalSpace = totalSpace;
+        this.maxBandwidth = maxBandwidth;
+        this.maxUser = maxUser;
+        this.uptimePercentage = uptimePercentage;
+        this.availableTimeRange = availableTimeRange;
+    }
+
     @Override
     public String toString() {
         return "Peer{" +
                 "id=" + id +
-                ", public_address='" + public_address + '\'' +
+                ", owner='" + owner + '\'' +
+                ", url='" + url + '\'' +
                 ", totalSpace=" + totalSpace +
+                ", usedSpace=" + usedSpace +
                 ", maxBandwidth=" + maxBandwidth +
                 ", maxUser=" + maxUser +
                 ", uptimePercentage=" + uptimePercentage +
                 ", availableTimeRange='" + availableTimeRange + '\'' +
-                ", description='" + description + '\'' +
                 ", date='" + date + '\'' +
                 ", status=" + status +
                 '}';
