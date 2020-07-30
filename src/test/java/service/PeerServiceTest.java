@@ -62,4 +62,15 @@ class PeerServiceTest {
             ex.printStackTrace();
         }
     }
+
+    @Test
+    public void updateUsedSpace() {
+        String pk1 = "7f9c01ffb80df6f6b245705ef81fe484ecebcb6a49b4d22133de990d84e1a955";
+        String pk2 = "97c2bbf6dd98ff076962f6fcdbfa4259ecf3f7367dfee3e54b7916de4a371469";
+        try {
+            PeerService.updateUsedSpace(pk1,1,102400);
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
 }

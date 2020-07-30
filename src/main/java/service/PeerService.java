@@ -4,6 +4,7 @@ package service;
 import config.Commons;
 import contract.PeerList;
 import entity.Peer;
+import entity.PeerSetting;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
@@ -14,6 +15,7 @@ import util.ConnectionUtil;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class PeerService {
@@ -21,7 +23,7 @@ public class PeerService {
         String contractAddress = null;
         try {
             //// owner of project deploy peer contract.
-            String pk = "f3f3850e57c9f8e73125b0dc394d4fc8be14b5ce94ae9abec8cb8d101a484e52";
+            String pk = Commons.OWNER_PEERS;
             Credentials credentials = Credentials.create(pk);
             Web3j web3j = ConnectionUtil.getWeb3jConnection();
            contractAddress = PeerList.deploy(web3j, credentials, new DefaultGasProvider()).send().getContractAddress();
@@ -70,6 +72,46 @@ public class PeerService {
         Credentials credentials = Credentials.create(pk);
         PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
         TransactionReceipt tx = peerList.updateTotalSpace(BigInteger.valueOf(index),BigInteger.valueOf(totalSpace)).send();
+        System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
+        return tx;
+    }
+
+    public static TransactionReceipt updateUsedSpace(String pk, int index, long usedSpace) throws Exception {
+        Credentials credentials = Credentials.create(pk);
+        PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
+        TransactionReceipt tx = peerList.updateUsedSpace(BigInteger.valueOf(index),BigInteger.valueOf(usedSpace)).send();
+        System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
+        return tx;
+    }
+
+    public static TransactionReceipt updateMaxUser(String pk, int index, int maxUserCount) throws Exception {
+        Credentials credentials = Credentials.create(pk);
+        PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
+        TransactionReceipt tx = peerList.updateMaxUser(BigInteger.valueOf(index),BigInteger.valueOf(maxUserCount)).send();
+        System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
+        return tx;
+    }
+
+    public static TransactionReceipt updateMaxBandwidth(String pk, int index, long bandwidth) throws Exception {
+        Credentials credentials = Credentials.create(pk);
+        PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
+        TransactionReceipt tx = peerList.updateMaxBandwidth(BigInteger.valueOf(index),BigInteger.valueOf(bandwidth)).send();
+        System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
+        return tx;
+    }
+
+    public static TransactionReceipt updateUptimePercentage(String pk, int index, int uptimePercentage) throws Exception {
+        Credentials credentials = Credentials.create(pk);
+        PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
+        TransactionReceipt tx = peerList.updateUpTimePercentage(BigInteger.valueOf(index),BigInteger.valueOf(uptimePercentage)).send();
+        System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
+        return tx;
+    }
+
+    public static TransactionReceipt updateUsedSpace(String pk, int index, String timeRange) throws Exception {
+        Credentials credentials = Credentials.create(pk);
+        PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
+        TransactionReceipt tx = peerList.updateAvailableTimeRange(BigInteger.valueOf(index),timeRange).send();
         System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
         return tx;
     }
