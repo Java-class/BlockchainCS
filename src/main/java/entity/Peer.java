@@ -3,6 +3,7 @@ package entity;
 import org.web3j.tuples.generated.Tuple11;
 
 import java.math.BigInteger;
+import java.util.Date;
 
 public class Peer {
     private int id;
@@ -128,6 +129,7 @@ public class Peer {
         this.maxUser = maxUser;
         this.uptimePercentage = uptimePercentage;
         this.availableTimeRange = availableTimeRange;
+        date = new Date().toString();
     }
 
     @Override
