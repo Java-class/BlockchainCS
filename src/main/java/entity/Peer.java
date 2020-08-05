@@ -130,6 +130,7 @@ public class Peer {
         this.uptimePercentage = uptimePercentage;
         this.availableTimeRange = availableTimeRange;
         date = new Date().toString();
+        status = PeerStatus.ACTIVE;
     }
 
     @Override

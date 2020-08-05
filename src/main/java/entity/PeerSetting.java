@@ -2,10 +2,10 @@ package entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.io.Serializable;
 
 @Entity
-public class PeerSetting {
-   // private Peer ownerPeer;
+public class PeerSetting implements Serializable {
 
     @Id
     private String publicKey;

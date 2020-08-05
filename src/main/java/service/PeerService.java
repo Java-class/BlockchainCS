@@ -11,6 +11,7 @@ import org.web3j.protocol.core.methods.response.TransactionReceipt;
 import org.web3j.tuples.generated.Tuple11;
 import org.web3j.tx.gas.DefaultGasProvider;
 import util.ConnectionUtil;
+import util.Log;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -56,6 +57,17 @@ public class PeerService {
             peers.add(peer);
         }
         return peers;
+    }
+
+    //// fix inside contract add get peer method called just by owner created peers.
+    public static Peer getPeer(String publicKey, String privateKey) throws Exception {
+        List<Peer> peers = list(privateKey);
+        Log.infoLog("list of peers: " + peers.size());
+        for(Peer peer : peers){
+            if(peer.getOwner().equalsIgnoreCase(publicKey))
+                return peer;
+        }
+        return null;
     }
 
 
@@ -107,7 +119,7 @@ public class PeerService {
         return tx;
     }
 
-    public static TransactionReceipt updateUsedSpace(String pk, int index, String timeRange) throws Exception {
+    public static TransactionReceipt updateAvailableTimeRange(String pk, int index, String timeRange) throws Exception {
         Credentials credentials = Credentials.create(pk);
         PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
         TransactionReceipt tx = peerList.updateAvailableTimeRange(BigInteger.valueOf(index),timeRange).send();

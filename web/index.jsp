@@ -3,7 +3,10 @@
 <head>
     <title>IndexPage</title>
     <t1>Hello This is My Blockchain Project, Design and Implement By Mostafa Anbarmoo</t1>
-    <a href="peer-register.jsp">Peer Registration...</a>
+    <br>
+    <a href="peer/login.jsp">Peer Login...</a>
+    <br>
+    <a href="peer/peer-register.jsp">Peer Registration...</a>
 </head>
 <body>
 
