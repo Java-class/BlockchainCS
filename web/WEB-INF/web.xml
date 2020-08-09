@@ -5,7 +5,7 @@
          version="4.0">
 
     <listener>
-        <listener-class>config.ContextListener</listener-class>
+        <listener-class>ir.javaclass.config.ContextListener</listener-class>
     </listener>
 
     <welcome-file-list>
@@ -19,7 +19,7 @@
 
     <servlet>
         <servlet-name>Login Peer</servlet-name>
-        <servlet-class>controller.LoginController</servlet-class>
+        <servlet-class>ir.javaclass.controller.LoginController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login Peer</servlet-name>
@@ -28,7 +28,7 @@
 
     <servlet>
         <servlet-name>Register Peer</servlet-name>
-        <servlet-class>controller.RegisterPeerController</servlet-class>
+        <servlet-class>ir.javaclass.controller.RegisterPeerController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Register Peer</servlet-name>
@@ -37,7 +37,7 @@
 
     <servlet>
         <servlet-name>Peer Setting</servlet-name>
-        <servlet-class>controller.PeerSettingController</servlet-class>
+        <servlet-class>ir.javaclass.controller.PeerSettingController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Peer Setting</servlet-name>
@@ -46,7 +46,7 @@
 
     <servlet>
         <servlet-name>Peer LocalSetting</servlet-name>
-        <servlet-class>controller.LocalSetting</servlet-class>
+        <servlet-class>ir.javaclass.controller.LocalSetting</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Peer LocalSetting</servlet-name>

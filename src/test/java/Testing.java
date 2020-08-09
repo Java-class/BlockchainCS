@@ -1,6 +1,6 @@
 
 
-import io.FileSplitter;
+import ir.javaclass.io.FileSplitter;
 
 import java.io.*;
 import java.nio.file.Files;

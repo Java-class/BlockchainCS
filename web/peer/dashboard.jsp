@@ -1,11 +1,11 @@
-<%@ page import="entity.Peer" %>
-<%@ page import="dao.PeerSettingDao" %>
-<%@ page import="entity.PeerSetting" %>
+<%@ page import="ir.javaclass.entity.Peer" %>
+<%@ page import="ir.javaclass.dao.PeerSettingRepository" %>
+<%@ page import="ir.javaclass.entity.PeerSetting" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     Peer info = (Peer) session.getAttribute("peer-info");
     System.out.println("@@@@@ "  + info.toString());
-    PeerSetting setting = PeerSettingDao.getSetting(info.getOwner());
+    PeerSetting setting = PeerSettingRepository.getSetting(info.getOwner());
 %>
 <html>
 <head>

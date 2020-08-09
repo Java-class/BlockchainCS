@@ -1,5 +1,5 @@
-<%@ page import="util.Util" %>
-<%@ page import="util.Log" %>
+<%@ page import="ir.javaclass.util.Util" %>
+<%@ page import="ir.javaclass.util.Log" %>
 <%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" language="java" %>
 
 <%
