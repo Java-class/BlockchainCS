@@ -42,7 +42,7 @@ public class PeerSettingController extends HttpServlet {
                 PeerService.updatePublicUrl(private_key,peer.getId(),url);
             peer = PeerService.getPeer(peer.getOwner(),private_key);
             session.setAttribute("peer-info",peer);
-            response.sendRedirect("/peer/dashboard.jsp");
+            response.sendRedirect("/public/dashboard.jsp");
         } catch (Exception ex) {
             Log.errorLog(ex);
             response.sendRedirect("/error.jsp");

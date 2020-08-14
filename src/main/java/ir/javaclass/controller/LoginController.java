@@ -1,36 +1,50 @@
 package ir.javaclass.controller;
 
 import ir.javaclass.entity.Peer;
+import ir.javaclass.entity.PeerSetting;
+import ir.javaclass.model.PeerInfoModel;
+import ir.javaclass.model.PeerLoginModel;
 import ir.javaclass.service.PeerService;
+import ir.javaclass.service.SettingService;
 import ir.javaclass.util.Log;
-import ir.javaclass.util.Util;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.io.IOException;
+@Controller
+@Scope("session")
+@SessionAttributes("peer-info")
+public class LoginController {
 
-@WebServlet(name = "LoginController",value = "/login.srv")
-public class LoginController extends HttpServlet {
+    @Autowired
+    SettingService settingService;
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession(true);
-        String public_key = Util.tryToString(request.getParameter("public_key"), "");
-        String private_key = Util.tryToString(request.getParameter("private_key"), "");
+    @RequestMapping(value = "/loginPeer", method = RequestMethod.POST)
+    public String loginPeer(Model model, @ModelAttribute("SpringWeb") PeerLoginModel peerModel){
+        System.out.println("login peer is called");
+        System.out.println(peerModel.toString());
         try {
-            Peer peer = PeerService.getPeer(public_key, private_key);
+            Peer peer = PeerService.getPeer(peerModel.getPublicKey(), peerModel.getPrivateKey());
+            PeerSetting setting = settingService.loadPeerSetting(peer.getOwner());
+            PeerInfoModel peerInfo = new PeerInfoModel(peer, setting);
             System.out.println("#### " + peer.toString());
             if(peer!=null) {
-                session.setAttribute("peer-info", peer);
-                session.setAttribute("peer-pk",private_key);
-                response.sendRedirect("/peer/dashboard.jsp");
-            }//// not found page...
+                model.addAttribute("peer-info",peerInfo);
+                //return "dashboard";
+                return "redirect:dashboard";
+//                session.setAttribute("peer-info", peer);
+//                session.setAttribute("peer-pk",private_key);
+//                response.sendRedirect("/peer/dashboard.jsp");
+            }else{
+                /// return mesage to user1
+            }
         } catch (Exception e) {
             Log.errorLog(e);
-            response.sendRedirect("/error.jsp");
+            //response.sendRedirect("/error.jsp");
         }
+        return "login";
     }
 
 }
