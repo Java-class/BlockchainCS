@@ -1,26 +1,31 @@
 package ir.javaclass.controller;
 
 import ir.javaclass.entity.Peer;
+import ir.javaclass.model.PeerInfoModel;
 import ir.javaclass.service.PeerService;
 import ir.javaclass.util.Log;
 import ir.javaclass.util.Util;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 
-@WebServlet(name = "PeerSettingController",value = "/peer/peer-setting.srv")
-public class PeerSettingController extends HttpServlet {
+@Controller
+@Scope("session")
+public class PeerSettingController {
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    @RequestMapping(value = "/peerSetting", method = RequestMethod.POST)
+    public String localSetting(HttpServletRequest request){
         HttpSession session = request.getSession(true);
-        Peer peer = (Peer) session.getAttribute("peer-info");
-        String private_key = (String) session.getAttribute("peer-pk");
+        PeerInfoModel infoModel = (PeerInfoModel) session.getAttribute("peer-info");
+        Peer peer =null;
+        if(infoModel!=null)
+            peer = infoModel.getPeer();
+        String private_key = infoModel.getPrivateKey();
         String av_range = Util.tryToString(request.getParameter("av-range"), "7*24");
         long totalSpace = Util.tryToLong(request.getParameter("total_space"), -1);
         int maxUserCount = Util.tryToInt(request.getParameter("usr-count"), 0);
@@ -40,12 +45,14 @@ public class PeerSettingController extends HttpServlet {
                 PeerService.updateUptimePercentage(private_key,peer.getId(),upTimePercentage);
             else if(!url.equals(peer.getUrl()))
                 PeerService.updatePublicUrl(private_key,peer.getId(),url);
+
             peer = PeerService.getPeer(peer.getOwner(),private_key);
-            session.setAttribute("peer-info",peer);
-            response.sendRedirect("/public/dashboard.jsp");
+            infoModel.setPeer(peer);
+            session.setAttribute("peer-info",infoModel);
+            return "redirect:dashboard";
         } catch (Exception ex) {
             Log.errorLog(ex);
-            response.sendRedirect("/error.jsp");
         }
+        return "redirect:login";
     }
 }

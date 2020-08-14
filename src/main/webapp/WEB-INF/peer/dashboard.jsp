@@ -1,10 +1,19 @@
 <%@ page import="ir.javaclass.entity.PeerSetting" %>
 <%@ page import="ir.javaclass.model.PeerInfoModel" %>
+<%@ page import="java.io.File" %>
+<%@ page import="org.apache.commons.io.FileUtils" %>
+<%@ page import="ir.javaclass.util.Util" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     PeerInfoModel info = (PeerInfoModel) session.getAttribute("peer-info");
     System.out.println("@@@@@ "  + info.toString());
     PeerSetting setting = info.getSetting();
+    long freeSpace = -1;
+    File data = new File(setting.getMountAddress());
+    if(data.exists())
+        freeSpace =  data.getFreeSpace();
+    System.out.println("#########Free space: " + freeSpace);
+
 %>
 <html>
 <head>
@@ -20,8 +29,8 @@
 </form>
 
 <%-- form for peer setting --%>
-<form method="post" action="${pageContext.request.contextPath}/peer/peer-setting.srv">
-    <label>Total Space <input type="number" name="total_space" value="<%=info.getPeer().getTotalSpace()%>"> GB</label>
+<form method="post" action="/peerSetting">
+    <label>Total Space <input type="number" name="total_space" value="<%=info.getPeer().getTotalSpace()%>"> GB - <%=Util.showSpace(freeSpace)%> left space</label>
     <br>
     <label>Max Supported User <input type="number" name="usr-count" value="<%=info.getPeer().getMaxUser()%>"></label>
     <br>
@@ -42,6 +51,8 @@
     <br>
     <input type="submit" value="Submit">
 </form>
+
+
 
 </body>
 </html>

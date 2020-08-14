@@ -392,4 +392,23 @@ public class Util {
         return readFileToString(input.getAbsolutePath());
     }
 
+    public static String showSpace(long freespace){
+        long kbDivisor = 1024L;
+        long mbDivisor = kbDivisor * kbDivisor;
+        long gbDivisor = mbDivisor * kbDivisor;
+
+        if (freespace <= mbDivisor) {
+            double kb = (double) freespace / kbDivisor;
+            return String.format("%.2f", kb) + " KB";
+        } else if (freespace <= gbDivisor) {
+            double mb = (double) freespace / mbDivisor;
+            return String.format("%.2f", mb) + " MB";
+        } else {
+            double gb = (double) freespace / gbDivisor;
+            return String.format("%.2f", gb) + " GB";
+        }
+
+
+    }
+
 }

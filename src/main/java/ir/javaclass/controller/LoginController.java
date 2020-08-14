@@ -29,6 +29,7 @@ public class LoginController {
             Peer peer = PeerService.getPeer(peerModel.getPublicKey(), peerModel.getPrivateKey());
             PeerSetting setting = settingService.loadPeerSetting(peer.getOwner());
             PeerInfoModel peerInfo = new PeerInfoModel(peer, setting);
+            peerInfo.setPrivateKey(peerModel.getPrivateKey());
             System.out.println("#### " + peer.toString());
             if(peer!=null) {
                 model.addAttribute("peer-info",peerInfo);
