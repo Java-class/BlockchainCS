@@ -9,9 +9,11 @@
     System.out.println("@@@@@ "  + info.toString());
     PeerSetting setting = info.getSetting();
     long freeSpace = -1;
-    File data = new File(setting.getMountAddress());
-    if(data.exists())
-        freeSpace =  data.getFreeSpace();
+    if(setting!=null) {
+        File data = new File(setting.getMountAddress());
+        if (data.exists())
+            freeSpace = data.getFreeSpace();
+    }
     System.out.println("#########Free space: " + freeSpace);
 
 %>

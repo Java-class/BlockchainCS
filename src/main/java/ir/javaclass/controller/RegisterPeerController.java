@@ -1,18 +1,40 @@
 package ir.javaclass.controller;
 
 import ir.javaclass.entity.Peer;
+import ir.javaclass.model.PeerRegisterModel;
 import ir.javaclass.service.PeerService;
 import ir.javaclass.util.Log;
 import ir.javaclass.util.Util;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(name = "RegisterPeerController",value = "/peer/registercontroller.srv")
-public class RegisterPeerController extends HttpServlet {
+@Controller
+@Scope("session")
+public class RegisterPeerController {
+
+
+    @PostMapping("/registerPeer")
+    public String registerPeer(Model model, @ModelAttribute("SpringWeb") PeerRegisterModel peerModel){
+        Peer newPeer = new Peer(peerModel.getUrl(), peerModel.getTotalSpace(),peerModel.getMaxBandwidth(), peerModel.getMaxUserCount(), peerModel.getUpTimePercentage(), peerModel.getAvailableRange());
+        System.out.println(newPeer.toString());
+        try {
+            PeerService.registerPeer(peerModel.getPrivateKey(), newPeer);
+            return "redirect:login";
+        } catch (Exception e) {
+            Log.errorLog(e);
+        }
+        return "redirect:login";
+    }
+
+
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession(true);

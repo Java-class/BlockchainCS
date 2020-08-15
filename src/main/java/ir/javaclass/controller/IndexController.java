@@ -17,8 +17,12 @@ public class IndexController {
     }
 
     @RequestMapping("/login")
-    public String next(Map<String, Object> model) {
+    public String login(Map<String, Object> model) {
         return "login";
+    }
+    @RequestMapping("/peer-register")
+    public String register(Map<String, Object> model) {
+        return "peer-register";
     }
 
 }
