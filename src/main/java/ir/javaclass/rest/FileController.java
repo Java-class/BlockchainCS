@@ -2,9 +2,10 @@ package ir.javaclass.rest;
 
 import ir.javaclass.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -30,5 +31,16 @@ public class FileController {
             fileService.saveFile(publicKey, inputFile);
         }
         return "true";
+    }
+
+    @GetMapping("/file/download/{fileName}")
+    @ResponseBody
+    public ResponseEntity<Resource> serveFile(@RequestParam("public_key") String publicKey, @PathVariable String fileName) throws IOException {
+        Resource file = fileService.loadAsResource(publicKey, fileName);
+        if(file.exists()) {
+            return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
+                    "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+        }else
+            return ResponseEntity.notFound().build();
     }
 }
