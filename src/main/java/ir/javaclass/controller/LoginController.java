@@ -1,5 +1,6 @@
 package ir.javaclass.controller;
 
+import ir.javaclass.config.Commons;
 import ir.javaclass.entity.Peer;
 import ir.javaclass.entity.PeerSetting;
 import ir.javaclass.model.PeerInfoModel;
@@ -33,6 +34,7 @@ public class LoginController {
             System.out.println("#### " + peer.toString());
             if(peer!=null) {
                 model.addAttribute("peer-info",peerInfo);
+                Commons.setPeerSetting(setting);
                 //return "dashboard";
                 return "redirect:dashboard";
 //                session.setAttribute("peer-info", peer);

@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @Scope("session")
-public class LocalSetting {
+public class LocalSettingController {
 
     @Autowired
     private SettingService settingService;
