@@ -10,12 +10,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 @RestController
-public class FileController {
+public class FileRestService {
 
     FileService fileService;
 
     @Autowired
-    public FileController(FileService fileService) {
+    public FileRestService(FileService fileService) {
         this.fileService = fileService;
     }
 
@@ -35,12 +35,22 @@ public class FileController {
 
     @GetMapping("/file/download/{fileName}")
     @ResponseBody
-    public ResponseEntity<Resource> serveFile(@RequestParam("public_key") String publicKey, @PathVariable String fileName) throws IOException {
+    public ResponseEntity<Resource> downloadFile(@RequestParam("public_key") String publicKey, @PathVariable String fileName) throws IOException {
         Resource file = fileService.loadAsResource(publicKey, fileName);
         if(file.exists()) {
             return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                     "attachment; filename=\"" + file.getFilename() + "\"").body(file);
         }else
+            return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/file/delete/{fileName}")
+    @ResponseBody
+    public ResponseEntity<Resource> deleteFile(@RequestParam("public_key") String publicKey, @PathVariable String fileName) {
+        boolean result = fileService.deleteFile(publicKey, fileName);
+        if(result)
+            return ResponseEntity.noContent().build();
+        else
             return ResponseEntity.notFound().build();
     }
 }

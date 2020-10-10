@@ -6,8 +6,13 @@ import ir.javaclass.contract.PeerList;
 import ir.javaclass.entity.Peer;
 import org.web3j.crypto.Credentials;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.Request;
+import org.web3j.protocol.core.methods.response.EthTransaction;
+import org.web3j.protocol.core.methods.response.Transaction;
 import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.tuples.generated.Tuple11;
+import org.web3j.tx.TransactionManager;
 import org.web3j.tx.gas.DefaultGasProvider;
 import ir.javaclass.util.ConnectionUtil;
 import ir.javaclass.util.Log;
@@ -16,6 +21,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class PeerService {
     public static String deployPeerContract(){
@@ -123,6 +129,8 @@ public class PeerService {
         PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
         TransactionReceipt tx = peerList.updateAvailableTimeRange(BigInteger.valueOf(index),timeRange).send();
         System.out.println("tx hash: " + tx.getTransactionHash() + " status: " + tx.getStatus());
+        //Request<?, EthTransaction> sssss = ConnectionUtil.getWeb3jConnection().ethGetTransactionByHash("sssss");
+        //Optional<Transaction> transaction = sssss.send().getTransaction();
         return tx;
     }
 

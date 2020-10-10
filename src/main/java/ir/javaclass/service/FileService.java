@@ -2,12 +2,12 @@ package ir.javaclass.service;
 
 import ir.javaclass.config.Commons;
 import ir.javaclass.config.FileDelimiter;
+import ir.javaclass.util.Log;
 import org.apache.commons.io.FileUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -43,6 +43,22 @@ public class FileService {
             return new File(userDirectory.getAbsolutePath() + FileDelimiter.getSystemDelimiter() + fileName);
         }else
             return null;
+    }
+
+
+    public boolean deleteFile(String publicKey, String fileName)  {
+        boolean result = false;
+        try {
+            File file = loadFile(publicKey, fileName);
+            if (file.exists()) {
+                FileUtils.forceDelete(file);
+                result = true;
+                Log.infoLog(" file: " + file.getAbsolutePath() + " deleted.");
+            }
+        }catch (Exception ex){
+            Log.errorLog(ex);
+        }
+        return result;
     }
 
 }
