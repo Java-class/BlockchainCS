@@ -1,3 +1,4 @@
+/*
 package ir.javaclass.controller;
 
 import ir.javaclass.entity.Peer;
@@ -59,3 +60,4 @@ public class RegisterPeerController {
         }
     }
 }
+*/

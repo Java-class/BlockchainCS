@@ -19,7 +19,7 @@ import java.io.InputStream;
 public class FileService {
 
     public boolean saveFile(String publicKey, MultipartFile inputFile) throws IOException {
-        File userDirectory = new File(Commons.getPeerSetting().getMountAddress() + FileDelimiter.getSystemDelimiter() + publicKey);
+        File userDirectory = new File(Commons.MOUNT_POINT_ADDRESS + FileDelimiter.getSystemDelimiter() + publicKey);
         if(!userDirectory.exists())
             FileUtils.forceMkdir(userDirectory);
         File desFile = new File(userDirectory.getAbsolutePath() + FileDelimiter.getSystemDelimiter() + inputFile.getResource().getFilename());
@@ -38,7 +38,7 @@ public class FileService {
     }
 
     public File loadFile(String publicKey, String fileName){
-        File userDirectory = new File(Commons.getPeerSetting().getMountAddress() + FileDelimiter.getSystemDelimiter() + publicKey);
+        File userDirectory = new File(Commons.MOUNT_POINT_ADDRESS + FileDelimiter.getSystemDelimiter() + publicKey);
         if(userDirectory.exists()){
             return new File(userDirectory.getAbsolutePath() + FileDelimiter.getSystemDelimiter() + fileName);
         }else

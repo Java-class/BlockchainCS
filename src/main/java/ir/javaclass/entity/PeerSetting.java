@@ -34,11 +34,10 @@ public class PeerSetting implements Serializable {
     public void setPublicKey(String publicKey) {
         this.publicKey = publicKey;
     }
-    //    @Override
-//    public String toString() {
-//        return "PeerSetting{" +
-//                "ownerPeer=" + ownerPeer +
-//                ", mountAddress='" + mountAddress + '\'' +
-//                '}';
-//    }
+        @Override
+    public String toString() {
+        return "PeerSetting{" +
+                ", mountAddress='" + mountAddress + '\'' +
+                '}';
+    }
 }

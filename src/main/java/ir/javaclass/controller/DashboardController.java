@@ -1,3 +1,4 @@
+/*
 package ir.javaclass.controller;
 
 
@@ -27,3 +28,4 @@ public class DashboardController {
         return "login";
     }
 }
+*/

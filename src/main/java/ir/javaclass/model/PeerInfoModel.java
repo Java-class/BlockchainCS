@@ -36,4 +36,13 @@ public class PeerInfoModel {
     public void setPrivateKey(String privateKey) {
         this.privateKey = privateKey;
     }
+
+    @Override
+    public String toString() {
+        return "PeerInfoModel{" +
+                "peer=" + peer.toString() +
+                ", setting=" + setting.toString() +
+                ", privateKey='" + privateKey + '\'' +
+                '}';
+    }
 }

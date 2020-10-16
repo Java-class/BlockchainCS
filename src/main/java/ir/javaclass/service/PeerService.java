@@ -4,24 +4,18 @@ package ir.javaclass.service;
 import ir.javaclass.config.Commons;
 import ir.javaclass.contract.PeerList;
 import ir.javaclass.entity.Peer;
-import org.web3j.crypto.Credentials;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.core.Request;
-import org.web3j.protocol.core.methods.response.EthTransaction;
-import org.web3j.protocol.core.methods.response.Transaction;
-import org.web3j.protocol.core.methods.response.TransactionReceipt;
-import org.web3j.protocol.core.methods.response.Web3ClientVersion;
-import org.web3j.tuples.generated.Tuple11;
-import org.web3j.tx.TransactionManager;
-import org.web3j.tx.gas.DefaultGasProvider;
 import ir.javaclass.util.ConnectionUtil;
 import ir.javaclass.util.Log;
+import org.web3j.crypto.Credentials;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.TransactionReceipt;
+import org.web3j.tuples.generated.Tuple11;
+import org.web3j.tx.gas.DefaultGasProvider;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public class PeerService {
     public static String deployPeerContract(){
