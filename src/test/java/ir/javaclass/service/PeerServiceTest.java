@@ -10,8 +10,8 @@ class PeerServiceTest {
 
     @Test
     public void deployPeerContract() {
-        String contract_address = PeerService.deployPeerContract();
-        //String contract_address = "0x8f7c2ac49d5bde884399c506f7bdab1327a860fe";
+        //String contract_address = PeerService.deployPeerContract();
+        String contract_address = "0x5437f75f2a23a4e724d93d139635245232c322cc";
         System.out.println("contract_address: " + contract_address);
     }
 

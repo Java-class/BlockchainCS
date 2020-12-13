@@ -16,7 +16,7 @@ public class ConnectionUtil {
                 if (web3jConnection == null) {
                     try {
                         System.out.println("Connecting to Ethereum ...");
-                        web3jConnection = Web3j.build(new HttpService("http://127.0.0.1:7545"));
+                        web3jConnection = Web3j.build(new HttpService("http://127.0.0.1:7555"));
                         System.out.println("Successfully connected to Ethereum Network.");
                         System.out.println("Client Version: " + web3jConnection.web3ClientVersion().send().getWeb3ClientVersion());
                     } catch (Exception ex) {

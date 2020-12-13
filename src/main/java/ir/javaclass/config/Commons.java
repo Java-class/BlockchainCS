@@ -6,12 +6,12 @@ import java.math.BigInteger;
 
 public class Commons {
 
-    public final static String OWNER_PEERS = "f3f3850e57c9f8e73125b0dc394d4fc8be14b5ce94ae9abec8cb8d101a484e52";
-    public final static String USER_PEER_PVK = "f3f3850e57c9f8e73125b0dc394d4fc8be14b5ce94ae9abec8cb8d101a484e52";
-    public final static String USER_PEER_PBK = "f3f3850e57c9f8e73125b0dc394d4fc8be14b5ce94ae9abec8cb8d101a484e52";
-    public final static String MOUNT_POINT_ADDRESS = "E:\\blockchain-cs\\peer_data\\user_data";
+    public final static String OWNER_PEERS = "9ff4f1322668866fe882183d617519f8393186a46c349a9cbe67318c5b75e0ad";
+    public final static String USER_PEER_PVK = "6327f02491711c147b051276a7d97f02c48bdcd66b659bd36b6861940f921644";
+    public final static String USER_PEER_PBK = "0xdE66bDA9f89CD719732dDe5206E8E4EDcCBA73ff";
+    public final static String MOUNT_POINT_ADDRESS = "C:\\Users\\Mostafa\\Desktop\\blockchain-cs\\peer_data\\user-data";
     public final static String CHUNK_SUFFIX = "-chunk";
     public final static BigInteger GAS_LIMIT = BigInteger.valueOf(6721975L);
     public final static BigInteger GAS_PRICE = BigInteger.valueOf(20000000000L);
-    public final static String PEER_CONTRACT_ADDRESS = "0x8f7c2ac49d5bde884399c506f7bdab1327a860fe";
+    public final static String PEER_CONTRACT_ADDRESS = "0x5437f75f2a23a4e724d93d139635245232c322cc";
 }

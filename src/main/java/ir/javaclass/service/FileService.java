@@ -2,8 +2,10 @@ package ir.javaclass.service;
 
 import ir.javaclass.config.Commons;
 import ir.javaclass.config.FileDelimiter;
+import ir.javaclass.model.FileInfoDto;
 import ir.javaclass.util.Log;
 import org.apache.commons.io.FileUtils;
+import org.apache.tomcat.jni.FileInfo;
 import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -59,6 +61,14 @@ public class FileService {
             Log.errorLog(ex);
         }
         return result;
+    }
+
+    public FileInfoDto getFileInfo(String publicKey, String fileName){
+        FileInfoDto fileInfo = null;
+        File file = loadFile(publicKey, fileName);
+        if (file.exists())
+            fileInfo = new FileInfoDto(file);
+        return fileInfo;
     }
 
 }

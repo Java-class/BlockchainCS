@@ -1,5 +1,6 @@
 package ir.javaclass.rest;
 
+import ir.javaclass.model.FileInfoDto;
 import ir.javaclass.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
@@ -25,6 +26,15 @@ public class FileRestService {
         return "true";
     }
 
+    @GetMapping(value = "/file/info")
+    public ResponseEntity<FileInfoDto> getFileInfo(@RequestParam("public_key") String publicKey, @RequestParam("file_name") String fileName) throws IOException {
+       FileInfoDto infoDto = fileService.getFileInfo(publicKey, fileName);
+       if(infoDto!=null)
+           return ResponseEntity.ok(infoDto);
+       else
+           return ResponseEntity.notFound().build();
+
+    }
     @PutMapping(value = "/file/multi-upload")
     public String uploadMultipartFile(@RequestParam("public_key") String publicKey, @RequestParam("file") MultipartFile[] parts) throws IOException {
         for(MultipartFile inputFile :parts) {
@@ -35,7 +45,7 @@ public class FileRestService {
 
     @GetMapping("/file/download/{fileName}")
     @ResponseBody
-    public ResponseEntity<Resource> downloadFile(@RequestParam("public_key") String publicKey, @PathVariable String fileName) throws IOException {
+    public ResponseEntity<Resource> downloadFile(@RequestHeader("public_key") String publicKey, @PathVariable String fileName) throws IOException {
         Resource file = fileService.loadAsResource(publicKey, fileName);
         if(file.exists()) {
             return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
@@ -46,7 +56,7 @@ public class FileRestService {
 
     @DeleteMapping("/file/delete/{fileName}")
     @ResponseBody
-    public ResponseEntity<Resource> deleteFile(@RequestParam("public_key") String publicKey, @PathVariable String fileName) {
+    public ResponseEntity<Resource> deleteFile(@RequestHeader("public_key") String publicKey, @PathVariable String fileName) {
         boolean result = fileService.deleteFile(publicKey, fileName);
         if(result)
             return ResponseEntity.noContent().build();

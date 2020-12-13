@@ -6,11 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class BlockchainPeerApp extends SpringBootServletInitializer {
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(BlockchainPeerApp.class);
-    }
+public class BlockchainPeerApp {
     public static void main(String[] args) {
         SpringApplication.run(BlockchainPeerApp.class, args);
     }
