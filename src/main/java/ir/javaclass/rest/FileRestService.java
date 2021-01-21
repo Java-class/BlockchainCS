@@ -47,10 +47,10 @@ public class FileRestService {
     @ResponseBody
     public ResponseEntity<Resource> downloadFile(@RequestHeader("public_key") String publicKey, @PathVariable String fileName) throws IOException {
         Resource file = fileService.loadAsResource(publicKey, fileName);
-        if(file.exists()) {
+        if (file != null && file.exists()) {
             return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION,
                     "attachment; filename=\"" + file.getFilename() + "\"").body(file);
-        }else
+        } else
             return ResponseEntity.notFound().build();
     }
 
