@@ -1,17 +1,28 @@
 package ir.javaclass.config;
 
-import ir.javaclass.entity.PeerSetting;
+import ir.javaclass.entity.Peer;
 
 import java.math.BigInteger;
 
 public class Commons {
 
-    public final static String OWNER_PEERS = "9ff4f1322668866fe882183d617519f8393186a46c349a9cbe67318c5b75e0ad";
-    public final static String USER_PEER_PVK = "6327f02491711c147b051276a7d97f02c48bdcd66b659bd36b6861940f921644";
-    public final static String USER_PEER_PBK = "0xdE66bDA9f89CD719732dDe5206E8E4EDcCBA73ff";
-    public final static String MOUNT_POINT_ADDRESS = "C:\\Users\\Mostafa\\Desktop\\blockchain-cs\\peer_data\\user-data";
+    public final static String OWNER_PEERS = "0470ea77351c5ac3d9d4a7a57c4abefb2dd23898b9d48dcd98b52d6e7c86cf11";
+    public final static String USER_PEER_PVK = "d3936809878121364c0ffa0963c2f66daeb7778ad35ffc15ba11e140a1272def";
+    public final static String USER_PEER_PBK = "0x38B8DC823Ce7477729507847bE7F83c7D5974Bd5";
+    //public final static String MOUNT_POINT_ADDRESS = "C:\\Users\\Mostafa\\Desktop\\blockchain-cs\\peer_data\\user-data";
+    public final static String MOUNT_POINT_ADDRESS = "/home/mostafa/00-Developing/blockchain-cs/peer_data/user_data";
     public final static String CHUNK_SUFFIX = "-chunk";
     public final static BigInteger GAS_LIMIT = BigInteger.valueOf(6721975L);
     public final static BigInteger GAS_PRICE = BigInteger.valueOf(20000000000L);
-    public final static String PEER_CONTRACT_ADDRESS = "0x5437f75f2a23a4e724d93d139635245232c322cc";
+    public final static String PEER_CONTRACT_ADDRESS = "0x2e3963255d2911153ab85095a23ed2476dff83f8";
+
+    /// peer local setting
+    public final static String ownerAddress = USER_PEER_PBK;
+    public final static String publicUrl = "127.0.0.1:8080";
+    public final static int maxUser = 100;
+    public final static long totalSpace = 1024000000;
+    public final static long maxBandwidth = 102400;
+    public final static int uptimePercentage = 90;
+    public final static String availableTimeRange = "5*24";
+    public final static Peer.PeerStatus peerStatus = Peer.PeerStatus.ACTIVE;
 }

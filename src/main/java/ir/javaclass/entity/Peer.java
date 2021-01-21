@@ -1,10 +1,12 @@
 package ir.javaclass.entity;
 
+import lombok.NoArgsConstructor;
 import org.web3j.tuples.generated.Tuple11;
 
 import java.math.BigInteger;
 import java.util.Date;
 
+@NoArgsConstructor
 public class Peer {
     private int id;
     private String owner;
