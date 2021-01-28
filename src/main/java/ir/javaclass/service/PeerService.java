@@ -67,9 +67,9 @@ public class PeerService {
         Credentials credentials = Credentials.create(privateKey);
         PeerList peerList = PeerList.load(Commons.PEER_CONTRACT_ADDRESS, ConnectionUtil.getWeb3jConnection(), credentials, new DefaultGasProvider());
         Tuple11<BigInteger, String, String, BigInteger, BigInteger, BigInteger, BigInteger, BigInteger, String, String, BigInteger> value = peerList.peers(Commons.USER_PEER_PBK).send();
-        if(value!=null)
+        if(value!=null && !value.component1().equals(BigInteger.ZERO)) {
             return new Peer(value);
-        else
+        } else
             return null;
     }
 
@@ -170,6 +170,7 @@ public class PeerService {
                     peer.setAvailableTimeRange(Commons.availableTimeRange);
                     peer.setUptimePercentage(Commons.uptimePercentage);
                     peer.setUrl(Commons.publicUrl);
+                    registerPeer(Commons.USER_PEER_PVK, peer);
                 } else {
                     updateUsedSpace(Commons.USER_PEER_PVK, usedSpace);
                     updateTotalSpace(Commons.USER_PEER_PVK, totalSpace);
