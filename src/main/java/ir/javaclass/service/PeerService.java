@@ -178,6 +178,7 @@ public class PeerService {
                     updateMaxUser(Commons.USER_PEER_PVK, Commons.maxUser);
                     updateAvailableTimeRange(Commons.USER_PEER_PVK, Commons.availableTimeRange);
                     updateUptimePercentage(Commons.USER_PEER_PVK, Commons.uptimePercentage);
+                    updatePublicUrl(Commons.USER_PEER_PVK, Commons.publicUrl);
                 }
             }
         } catch (Exception ex) {

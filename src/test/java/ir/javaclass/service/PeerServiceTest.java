@@ -33,6 +33,7 @@ class PeerServiceTest {
     public void list() {
         try {
             List<Peer> list = PeerService.list(Commons.USER_PEER_PVK);
+            System.out.println("Size of List: " + list.size());
             for(Peer peer : list)
                 System.out.println(peer.toString());
         }catch (Exception ex){
@@ -43,6 +44,7 @@ class PeerServiceTest {
     @Test
     public void getPeer() throws Exception {
         Peer peer = PeerService.getPeer(Commons.USER_PEER_PVK);
+        assert peer != null;
         System.out.println("#### " + peer.toString());
     }
 
