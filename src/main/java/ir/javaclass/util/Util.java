@@ -1,10 +1,12 @@
 
 package ir.javaclass.util;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
+
 import java.io.*;
-import java.net.*;
-import java.util.*;
+import java.net.HttpURLConnection;
+import java.util.Map;
+import java.util.Set;
 
 public class Util {
     public static final long TIME_SECOND = 1000;

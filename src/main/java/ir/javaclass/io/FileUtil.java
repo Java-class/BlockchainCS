@@ -2,12 +2,15 @@
 
 package ir.javaclass.io;
 
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.io.FileUtils;
 import ir.javaclass.util.Log;
 import ir.javaclass.util.Util;
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FileUtils;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 public class FileUtil {
